@@ -79,6 +79,7 @@ local plugins = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+    event = { "CmdlineEnter" },
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -96,6 +97,14 @@ local plugins = {
         "go",
       },
     },
+  },
+  -- disable cause by slow
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+  },
+  {
+    "psliwka/vim-smoothie",
   },
 
   -- To make a plugin not be loaded
