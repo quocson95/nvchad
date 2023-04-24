@@ -106,7 +106,18 @@ local plugins = {
   {
     "psliwka/vim-smoothie",
   },
-
+  {
+    "johmsalas/text-case.nvim",
+    config = function()
+      require("textcase").setup {}
+      require("telescope").load_extension "textcase"
+    end,
+    dependencies = {
+      --Please make sure you install markdown and markdown_inline parser
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+    event = { "CmdlineEnter" },
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
