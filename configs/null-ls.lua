@@ -10,7 +10,7 @@ local sources = {
 
 	-- webdev stuff
 	b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-	b.formatting.prettier.with({ filetypes = { "lua", "go", "html", "ts" } }), -- so prettier works only on these filetypes
+	b.formatting.prettier.with({ filetypes = { "lua", "go", "html", "ts", "proto" } }), -- so prettier works only on these filetypes
 
 	-- Lua
 	b.formatting.stylua,
@@ -22,6 +22,9 @@ local sources = {
 	-- b.diagnostics.golangci_lint,
 	b.formatting.goimports,
 	-- b.formatting.gofmt,
+	-- proto"w"
+	-- b.diagnostics.buf
+	b.diagnostics.protoc_gen_lint,
 }
 
 local async_formatting = function(bufnr)
