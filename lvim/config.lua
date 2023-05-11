@@ -33,7 +33,7 @@ opt.numberwidth = 2
 opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append "sI"
+opt.shortmess:append("sI")
 
 opt.signcolumn = "yes"
 opt.splitbelow = true
@@ -47,13 +47,13 @@ opt.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+opt.whichwrap:append("<>[]hl")
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = {
-  enabled = true,
-  pattern = { "*.lua", "*.go", "*.html", "*.ts", "*.proto" },
-  timeout = 1000,
+	enabled = true,
+	pattern = { "*.lua", "*.go", "*.html", "*.ts", "*.proto" },
+	timeout = 1000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -100,15 +100,15 @@ lvim.builtin.treesitter.auto_install = true
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tsserver" })
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tsserver" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
-lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
-  return server ~= "angularls"
-end, lvim.lsp.automatic_configuration.skipped_servers)
+-- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+-- return server ~= "angularls"
+-- end, lvim.lsp.automatic_configuration.skipped_servers)
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
@@ -121,94 +121,152 @@ end, lvim.lsp.automatic_configuration.skipped_servers)
 -- end
 
 -- -- linters, formatters and code actions <https://www.lunarvim.org/docs/configuration/language-features/linting-and-formatting>
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { name = "gofmt" },
-  { name = "goimports" },
-  { name = "deno_fmt" },
-  { name = "stylua" },
-  { name = "clang_format" },
-  { name = "protolint" },
-  --   {
-  --     command = "prettier",
-  --     extra_args = { "--print-width", "100" },
-  --     filetypes = { "typescript", "typescriptreact" },
-  --   },
-}
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { name = "protoc_gen_lint" }
-  --   { command = "flake8", filetypes = { "python" } },
-  --   {
-  --     command = "shellcheck",
-  --     args = { "--severity", "warning" },
-  --   },
-}
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	{ name = "gofmt" },
+	{ name = "goimports" },
+	{ name = "deno_fmt" },
+	{ name = "stylua" },
+	{ name = "clang_format" },
+	{ name = "protolint" },
+	--   {
+	--     command = "prettier",
+	--     extra_args = { "--print-width", "100" },
+	--     filetypes = { "typescript", "typescriptreact" },
+	--   },
+})
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+	{ name = "protoc_gen_lint" },
+	--   { command = "flake8", filetypes = { "python" } },
+	--   {
+	--     command = "shellcheck",
+	--     args = { "--severity", "warning" },
+	--   },
+})
 
-local code_actions = require "lvim.lsp.null-ls.code_actions"
-code_actions.setup {
-  { name = "gomodifytags" },
-  { name = "impl" },
-  { name = "refactoring" },
-  -- {
-  --     exe = "eslint",
-  --     filetypes = { "typescript", "typescriptreact" },
-  --   },
-}
+local code_actions = require("lvim.lsp.null-ls.code_actions")
+code_actions.setup({
+	{ name = "gomodifytags" },
+	{ name = "impl" },
+	{ name = "refactoring" },
+	-- {
+	--     exe = "eslint",
+	--     filetypes = { "typescript", "typescriptreact" },
+	--   },
+})
+
+require("lvim.lsp.manager").setup("angularls")
+lvim.builtin.treesitter.rainbow.enable = true
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/configuration/plugins/user-plugins>
 lvim.plugins = {
-  {
-    'sainnhe/sonokai',
-    config = function()
-    end
-
-  },
-  {
-    "fatih/vim-go",
-  },
-  {
-    "buoto/gotests-vim"
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
-        RGB = true,      -- #RGB hex codes
-        RRGGBB = true,   -- #RRGGBB hex codes
-        RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true,   -- CSS rgb() and rgba() functions
-        hsl_fn = true,   -- CSS hsl() and hsla() functions
-        css = true,      -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true,   -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      })
-    end,
-  },
-  {
-    "glepnir/lspsaga.nvim",
-    event = "LspAttach",
-    config = function()
-      require("lspsaga").setup({})
-    end,
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-      --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" }
-    }
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require "lsp_signature".on_attach() end,
-  },
-  {
-    "vimsence/vimsence"
-  }
-  --     {
-  --       "folke/trouble.nvim",
-  --       cmd = "TroubleToggle",
-  --     },
-  --
+	{
+		"sainnhe/sonokai",
+		config = function() end,
+	},
+	{
+		"fatih/vim-go",
+	},
+	{
+		"buoto/gotests-vim",
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+				RGB = true, -- #RGB hex codes
+				RRGGBB = true, -- #RRGGBB hex codes
+				RRGGBBAA = true, -- #RRGGBBAA hex codes
+				rgb_fn = true, -- CSS rgb() and rgba() functions
+				hsl_fn = true, -- CSS hsl() and hsla() functions
+				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+			})
+		end,
+	},
+	{
+		"glepnir/lspsaga.nvim",
+		event = "LspAttach",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+		dependencies = {
+			{ "nvim-tree/nvim-web-devicons" },
+			--Please make sure you install markdown and markdown_inline parser
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "BufRead",
+		config = function()
+			require("lsp_signature").on_attach()
+		end,
+	},
+	{
+		"vimsence/vimsence",
+	},
+	{
+		"mrjones2014/nvim-ts-rainbow",
+		dependencies = {
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	},
+	{
+		"romgrk/nvim-treesitter-context",
+		config = function()
+			require("treesitter-context").setup({
+				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+				throttle = true, -- Throttles plugin updates (may improve performance)
+				max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+				patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+					-- For all filetypes
+					-- Note that setting an entry here replaces all other patterns for this entry.
+					-- By setting the 'default' entry below, you can control which nodes you want to
+					-- appear in the context window.
+					default = {
+						"class",
+						"function",
+						"method",
+					},
+				},
+			})
+		end,
+	},
+	{
+		"tzachar/cmp-tabnine",
+		build = "./install.sh",
+		dependencies = "hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+	},
+	{
+		"karb94/neoscroll.nvim",
+		event = "WinScrolled",
+		config = function()
+			require("neoscroll").setup({
+				-- All these keys will be mapped to their corresponding default scrolling animation
+				mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
+				hide_cursor = true, -- Hide cursor while scrolling
+				stop_eof = true, -- Stop at <EOF> when scrolling downwards
+				use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+				respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+				cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+				easing_function = nil, -- Default easing function
+				pre_hook = nil, -- Function to run before the scrolling animation starts
+				post_hook = nil, -- Function to run after the scrolling animation ends
+			})
+		end,
+	},
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter-angular",
+	-- },
+	--
+	--     {
+	--       "folke/trouble.nvim",
+	--       cmd = "TroubleToggle",
+	--     },
+	--
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
