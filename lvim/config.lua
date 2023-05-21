@@ -235,29 +235,73 @@ lvim.plugins = {
 		end,
 	},
 	{
-		"tzachar/cmp-tabnine",
-		build = "./install.sh",
-		dependencies = "hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-	},
-	{
-		"karb94/neoscroll.nvim",
-		event = "WinScrolled",
+		"folke/todo-comments.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
 		config = function()
-			require("neoscroll").setup({
-				-- All these keys will be mapped to their corresponding default scrolling animation
-				mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
-				hide_cursor = true, -- Hide cursor while scrolling
-				stop_eof = true, -- Stop at <EOF> when scrolling downwards
-				use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-				respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-				cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-				easing_function = nil, -- Default easing function
-				pre_hook = nil, -- Function to run before the scrolling animation starts
-				post_hook = nil, -- Function to run after the scrolling animation ends
+			require("todo-comments").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
 			})
 		end,
 	},
+	{
+		"tpope/vim-fugitive",
+		cmd = {
+			"G",
+			"Git",
+			"Gdiffsplit",
+			"Gread",
+			"Gwrite",
+			"Ggrep",
+			"GMove",
+			"GDelete",
+			"GBrowse",
+			"GRemove",
+			"GRename",
+			"Glgrep",
+			"Gedit",
+		},
+		ft = { "fugitive" },
+	},
+	{
+		"sindrets/diffview.nvim",
+		event = "BufRead",
+	},
+	{
+		"f-person/git-blame.nvim",
+		event = "BufRead",
+		config = function()
+			vim.cmd("highlight default link gitblame SpecialComment")
+			vim.g.gitblame_enabled = 0
+		end,
+	},
+	-- {
+	-- 	"tzachar/cmp-tabnine",
+	-- 	build = "./install.sh",
+	-- 	dependencies = "hrsh7th/nvim-cmp",
+	-- 	event = "InsertEnter",
+	-- },
+	-- {
+	-- 	"karb94/neoscroll.nvim",
+	-- 	event = "WinScrolled",
+	-- 	config = function()
+	-- 		require("neoscroll").setup({
+	-- 			-- All these keys will be mapped to their corresponding default scrolling animation
+	-- 			mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
+	-- 			hide_cursor = true, -- Hide cursor while scrolling
+	-- 			stop_eof = true, -- Stop at <EOF> when scrolling downwards
+	-- 			use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+	-- 			respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+	-- 			cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+	-- 			easing_function = nil, -- Default easing function
+	-- 			pre_hook = nil, -- Function to run before the scrolling animation starts
+	-- 			post_hook = nil, -- Function to run after the scrolling animation ends
+	-- 		})
+	-- 	end,
+	-- },
 	-- {
 	-- 	"nvim-treesitter/nvim-treesitter-angular",
 	-- },
