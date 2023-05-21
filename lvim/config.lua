@@ -68,6 +68,8 @@ lvim.keys.normal_mode["gh"] = "<cmd>Lspsaga lsp_finder<CR>"
 lvim.keys.normal_mode["gt"] = "<cmd>Lspsaga peek_type_definition<CR>"
 
 lvim.keys.normal_mode["<leader>o"] = "<cmd>Lspsaga outline<CR>"
+lvim.keys.normal_mode["|"] = ":vsplit<CR>"
+lvim.keys.normal_mode["-"] = ":split<CR>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
@@ -213,27 +215,27 @@ lvim.plugins = {
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
 	},
-	{
-		"romgrk/nvim-treesitter-context",
-		config = function()
-			require("treesitter-context").setup({
-				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-				throttle = true, -- Throttles plugin updates (may improve performance)
-				max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-				patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-					-- For all filetypes
-					-- Note that setting an entry here replaces all other patterns for this entry.
-					-- By setting the 'default' entry below, you can control which nodes you want to
-					-- appear in the context window.
-					default = {
-						"class",
-						"function",
-						"method",
-					},
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"romgrk/nvim-treesitter-context",
+	-- 	config = function()
+	-- 		require("treesitter-context").setup({
+	-- 			enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+	-- 			throttle = true, -- Throttles plugin updates (may improve performance)
+	-- 			max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+	-- 			patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+	-- 				-- For all filetypes
+	-- 				-- Note that setting an entry here replaces all other patterns for this entry.
+	-- 				-- By setting the 'default' entry below, you can control which nodes you want to
+	-- 				-- appear in the context window.
+	-- 				default = {
+	-- 					"class",
+	-- 					"function",
+	-- 					"method",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"folke/todo-comments.nvim",
 		dependencies = {
@@ -248,35 +250,8 @@ lvim.plugins = {
 		end,
 	},
 	{
-		"tpope/vim-fugitive",
-		cmd = {
-			"G",
-			"Git",
-			"Gdiffsplit",
-			"Gread",
-			"Gwrite",
-			"Ggrep",
-			"GMove",
-			"GDelete",
-			"GBrowse",
-			"GRemove",
-			"GRename",
-			"Glgrep",
-			"Gedit",
-		},
-		ft = { "fugitive" },
-	},
-	{
 		"sindrets/diffview.nvim",
 		event = "BufRead",
-	},
-	{
-		"f-person/git-blame.nvim",
-		event = "BufRead",
-		config = function()
-			vim.cmd("highlight default link gitblame SpecialComment")
-			vim.g.gitblame_enabled = 0
-		end,
 	},
 	-- {
 	-- 	"tzachar/cmp-tabnine",
