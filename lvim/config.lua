@@ -253,6 +253,9 @@ lvim.plugins = {
 		"sindrets/diffview.nvim",
 		event = "BufRead",
 	},
+	{
+		"alvan/vim-closetag",
+	},
 	-- {
 	-- 	"tzachar/cmp-tabnine",
 	-- 	build = "./install.sh",
