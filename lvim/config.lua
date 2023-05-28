@@ -256,6 +256,12 @@ lvim.plugins = {
 	{
 		"alvan/vim-closetag",
 	},
+	{
+		"hrsh7th/nvim-cmp",
+	},
+	{
+		"hrsh7th/cmp-buffer",
+	},
 	-- {
 	-- 	"tzachar/cmp-tabnine",
 	-- 	build = "./install.sh",
