@@ -109,5 +109,6 @@ export PYPATH=/home/sondq/.local/bin
 export GOPATH=/home/sondq/Documents/go
 export LVIMPATH=/home/sondq/.cargo/bin
 export DENO_INSTALL="/home/sondq/.deno/bin"
-export PATH=$PATH:$PYPATH:/usr/local/go/bin:$GOPATH:$LVIMPATH:$GOPATH/bin:$DENO_INSTALL
+export NVIMPATH="/home/sondq/app/nvim"
+export PATH=$PATH:$PYPATH:/usr/local/go/bin:$GOPATH:$LVIMPATH:$GOPATH/bin:$DENO_INSTALL:$NVIMPATH:$NVIMPATH/bin
 
